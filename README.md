@@ -1,2 +1,2 @@
-# Project-1---Ironhack---Game
+# Project-1-Ironhack-Game
 Ironhack Videogame
