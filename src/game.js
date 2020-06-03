@@ -12,6 +12,7 @@ class Game {
             this._clear();
             this._draw();
             this._move();
+            this._addEnemy();
         }, 1000 / 60);
     }
 
@@ -23,18 +24,21 @@ class Game {
     _draw() {
         this.player.draw();
         this.enemies.forEach(enemy => {
-            enemy.draw()
+            enemy.draw();
           });
     }
     
     _addEnemy() {
-        this.enemies.push(new Enemy(ctx, 3, 1))
+        
+        if (this.tick++ < 5) {
+            this.enemies.push(new Enemy(ctx, 3, 1));
+        }
     }
     
     _move() {
         this.player.move();
         this.enemies.forEach(enemy => {
-            enemy.draw()
+            enemy.move()
           });
     }
     

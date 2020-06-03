@@ -14,13 +14,16 @@ class Player {
 
         this.health = health;
         this.strength = strength;
-        // this.rupees = [];
+
+        this.bending = new Bending(this);
         
     }
 
     draw() {
         this.ctx.fillStyle = '#56AF2F';
         ctx.fillRect(this.x, this.y, this.width, this.height);
+        
+        this.bending.draw();
     }
 
     move() {
@@ -52,6 +55,8 @@ class Player {
         this.x += this.vx;
         this.y += this.vy;
 
+        this.bending.move();
+
         // console.log(this.currentPosition.push(this.x, this.y));
         // console.log(`The position of x is ${this.x} and the position of y is ${this.y}`);
 
@@ -64,14 +69,5 @@ class Player {
         //     game over
         // }
     }
-
-    // swordAttack() {
-    //     document.addEventListener('keyup', key => {
-    //         if (key.keyCode === SPACE) {
-    //             // FRAMES
-    //         });
-    //     }
-    // }
-
 
 }
