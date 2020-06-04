@@ -1,52 +1,34 @@
-// class Bow {
-//     constructor(ctx, x, y, dx, dy) {
-//         this.x = x;
-//         this.y = y;
-
-//         this.dx = dx;
-//         this.dy = dy;
-//     }
-
-//     draw() {
-//         this.ctx.fillStyle = 'blue';
-//         this.ctx.fillRect(this.x, this.y, 10, 10);
-//     }
-
-//     update() {
-//         this.x += this.dx;
-//         this.y += this.dy;
-//     }
-// }
-
-
-// -------------------------------------------------
-
 class Airbending {
-    constructor(ctx, x, y) {
+    constructor(ctx, angle, x, y, dx, dy) {
         this.ctx = ctx;
 
         this.x =x;
         this.y = y;
 
-        this.width = 10;
-        this.heigth = 10;
+        this.width = 30;
+        this.height = 10;
 
-        this.vx = 0;
-        this.vy = 0;
+        this.v = 3;
+        this.dx = dx * this.v;
+        this.dy = dy * this.v;
+        this.angle = angle;
     }
 
     draw() {
-        this.ctx.fillStyle = '#1993E3';
-        this.ctx.fillRect(this.x, this.y, this.width, this.heigth);
+        this.ctx.save();
+
+        this.ctx.fillStyle = 'blue';
+        this.ctx.translate(this.x, this.y);
+        this.ctx.rotate(this.angle);
+        this.ctx.fillRect(-15, -5, this.width, this.height);
+        
+        this.ctx.restore();
     }
 
     move() {
-        document.addEventListener('keyup', key => {
-            if (key.keyCode === SPACE) {
-                this.vx = 1;
-            }
-        });
-        this.x += this.vx;
+        
+        this.x += this.dx;
+        this.y += this.dy;
     }
     
 }

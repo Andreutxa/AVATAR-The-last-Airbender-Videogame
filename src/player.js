@@ -4,50 +4,96 @@ class Player {
 
         this.x = 0;
         this.y = 0;
-        // this.currentPosition = [];
-
+        
+        this.currPositX;
+        this.currPositY;
+        
         this.vx = 0;
         this.vy = 0;
-
+        
         this.width = 50;
         this.height = 50;
-
+        
         this.health = health;
         this.strength = strength;
 
-        this.bending = new Bending(this);
         
+        this.angle;
+        this.airbendingAttacks = [];
+        this.attackOn = true;
+        this.attackInterval = 300;
+        
+        this.dx;
+        this.dy;
     }
 
+    
     draw() {
-        this.ctx.fillStyle = '#56AF2F';
-        ctx.fillRect(this.x, this.y, this.width, this.height);
         
-        this.bending.draw();
+        this.ctx.fillStyle = '#56AF2F';
+        this.ctx.fillRect(this.x, this.y, this.width, this.height);
+        
+        this.airbendingAttacks.forEach((attack) => {
+            attack.draw();
+            attack.move();
+        });
+    }
+    
+    update(mouseX, mouseY) {
+        this.dx = mouseX - this.x;
+        this.dy = mouseY - this.y;
+        this.angle = Math.atan2(this.dy, this.dx);
+    }
+    
+    attack() {
+         
+        if (this.attackOn) {
+            let dx = Math.cos(this.angle);
+            let dy = Math.sin(this.angle);
+
+            let airbending = new Airbending(this.ctx, this.angle, this.x + this.width / 2, this.y + this.height / 2, dx, dy);
+            this.airbendingAttacks.push(airbending); 
+
+            this.attackOn = false;
+            this.reload();
+            return true;
+        }
+    }
+
+    reload() {
+        setTimeout(() => {
+            this.attackOn = true;
+        }, this.attackInterval);
     }
 
     move() {
 
+        document.addEventListener('mousedown', () => {
+           this.attack(); 
+        });
+
         document.addEventListener('keydown', key => {
-           if (key.keyCode === UP) {
+           if (key.keyCode === UP || key.keyCode === W) {
                this.vy = -4;
-           } else if (key.keyCode === DOWN) {
+           } else if (key.keyCode === DOWN || key.keyCode === S) {
                this.vy = 4;
-           } else if (key.keyCode === LEFT) {
+           } else if (key.keyCode === LEFT || key.keyCode === A) {
                this.vx = -4;
-           } else if (key.keyCode === RIGHT) {
+           } else if (key.keyCode === RIGHT || key.keyCode === D) {
                this.vx = 4;
+           } else if (key.keyCode === SPACE) {
+               this.attack();
            }
         });
 
         document.addEventListener('keyup', key => {
-            if (key.keyCode === UP) {
+            if (key.keyCode === UP || key.keyCode === W) {
                 this.vy = 0;
-            } else if (key.keyCode === DOWN) {
+            } else if (key.keyCode === DOWN || key.keyCode === S) {
                 this.vy = 0;
-            } else if (key.keyCode === LEFT) {
+            } else if (key.keyCode === LEFT || key.keyCode === A) {
                 this.vx = 0;
-            } else if (key.keyCode === RIGHT) {
+            } else if (key.keyCode === RIGHT || key.keyCode === D) {
                 this.vx = 0;
             }
          });
@@ -55,10 +101,8 @@ class Player {
         this.x += this.vx;
         this.y += this.vy;
 
-        this.bending.move();
-
-        // console.log(this.currentPosition.push(this.x, this.y));
-        // console.log(`The position of x is ${this.x} and the position of y is ${this.y}`);
+        this.currPositX = this.x;
+        this.currPositY = this.y;
 
     }
 

@@ -5,6 +5,17 @@ class Game {
         this.player = new Player(ctx, 4, 2);
         this.enemies = [];
         this.tick = 0;
+
+        this.mouseX;
+        this.mouseY;
+        this.setListeners();
+    }
+
+    setListeners() {
+        document.addEventListener('mousemove', (evt) => {
+            this.mouseX = evt.clientX - 25;
+            this.mouseY = evt.clientY - 25;
+        });
     }
 
     start() {
@@ -23,9 +34,14 @@ class Game {
     
     _draw() {
         this.player.draw();
+        this.player.update(this.mouseX, this.mouseY);
+
         this.enemies.forEach(enemy => {
             enemy.draw();
+            enemy.update(this.player.x, this.player.y);
+            enemy.attack();
           });
+        
     }
     
     _addEnemy() {
