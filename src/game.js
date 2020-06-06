@@ -53,10 +53,18 @@ class Game {
     
     _move() {
         this.player.move();
-        this.enemies.forEach(enemy => {
-            enemy.move();
-            // enemy.nextMove();
-          });
+        
+    }
+
+    _checkColissions() {
+        const colission = (
+            this.enemies.some(enemy => enemy.collide(this.player))
+        );
+
+        if (colission) {
+            this.player.health--;
+            console.log('hello')
+        }
     }
     
 }

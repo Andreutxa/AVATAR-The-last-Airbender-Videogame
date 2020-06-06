@@ -38,7 +38,7 @@ class Enemy extends Player {
         this.airbendingAttacks.forEach(attack => {
             attack.draw();
             attack.move();
-        })
+        });
     }
 
     attack() {
@@ -57,29 +57,30 @@ class Enemy extends Player {
     }
 
     update(avatarX, avatarY) {
-        this.x = (this.vx * this.v);
-        this.y = (this.vy * this.v);
+        
+        this.x += (this.vx * this.v);
+        this.y += (this.vy * this.v);
 
+        if (this.x >= ( this.ctx.canvas.width - this.width ) - this.width || this.y >= (this.ctx.canvas.height - 110) - this.height || this.x <= this.width || this.y <= 70){
+            this.move();
+        }
+    
         // if (this.x < 0 || this.x > this.ctx.canvas.width) {
         //     this.ctx.canvas.width;
         // } else if (this.y < 0 || this.y > this.ctx.canvas.height) {
         //     this.ctx.canvas.height;
         // }
-
+    
         if (Math.abs(this.nextMoveX - this.x) <= 10 && Math.abs(this.nextMoveY - this.y) <= 10) {
-            this.move(); // this.nextMove();
+            this.move(); 
         }
 
-        this.dx = avatarX - this.x;
+        this.dx = avatarX - this.x; 
         this.dy = avatarY - this.y;
         this.angle = Math.atan2(this.dy, this.dx);
     }
 
     move() {
-        function rand(a, b) {
-            return Math.floor(Math.random() * b + a);
-        }
-
         // this.nextMoveX = Math.floor(Math.random() * (this.ctx.canvas.width + this.width));
         // this.nextMoveY = Math.floor(Math.random() * (this.ctx.canvas.height + this.height));
         this.nextMoveX = rand(0, this.ctx.canvas.width);
@@ -93,15 +94,12 @@ class Enemy extends Player {
         this.vy = Math.sin(angle);
     }
 
-    // nextMove() {
-    //     this.nextMoveX = rand(0, this.ctx.canvas.width);
-    //     this.nextMoveY = rand(0, this.ctx.canvas.height);
+    collide(player) {
+        const collideX = player.x + player.width > this.x && player.x < this.x + this.width;
+        const collideY = player.y < this.y + this.height && player.y + player.height > this.y;
 
-    //     let dx = this.nextMoveX - this.x;
-    //     let dy = this.nextMoveY - this.y;
+        return collideX && collideY;
+        
+    }
 
-    //     let angle = Math.atan2(dy, dx);
-    //     this.vx = Math.cos(angle);
-    //     this.vy = Math.sin(angle);
-    // }
 }
