@@ -47,14 +47,15 @@ class Game {
     _addEnemy() {
         
         if (this.tick++ < 5) {
-            this.enemies.push(new Enemy(ctx, 3, 1));
+            this.enemies.push(new Enemy(ctx, 3, 1,));
         }
     }
     
     _move() {
         this.player.move();
         this.enemies.forEach(enemy => {
-            enemy.move()
+            enemy.move();
+            // enemy.nextMove();
           });
     }
     

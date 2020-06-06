@@ -1,8 +1,18 @@
+
 canvas {
-    border: 2px solid green;
+    border: 2px solid #6A611F;
+    background-color: white;
+    margin-top: 80px;
 }
 
-/* body {
-    background-image: url(../images/bending-icons.jpg);
-    background-size: cover;
-} */
+body {
+    background-image: url('../images/bending-icons.jpg');
+    background-size: 100% 120%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+

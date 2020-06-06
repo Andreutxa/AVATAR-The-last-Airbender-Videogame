@@ -1,9 +1,9 @@
 class Player {
-    constructor (ctx, health, strength) {
+    constructor (ctx, health, strength, data) {
         this.ctx = ctx;
 
-        this.x = 0;
-        this.y = 0;
+        this.x = this.ctx.canvas.width / 2;
+        this.y = this.ctx.canvas.height / 2;
         
         this.currPositX;
         this.currPositY;
@@ -25,6 +25,17 @@ class Player {
         
         this.dx;
         this.dy;
+
+        this.img = new Image();
+        this.img.src = './images/Aang-movements/Aang-DOWN.png';
+
+        this.spriteWidth = 215;
+        this.spriteHeight = 34;
+
+        this.img.frames = 10;
+
+        this.aangWidth = this.spriteWidth / this.img.frames;
+
     }
 
     

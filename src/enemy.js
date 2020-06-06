@@ -5,20 +5,21 @@ class Enemy extends Player {
         this.width = 50;
         this.height = 50;
 
-        this.x = x;
-        this.y = y;
-        // this.x = Math.random() * (this.ctx.canvas.width - this.width);
-        // this.y = Math.random() * (this.ctx.canvas.height - this.height);
+        // this.x = x;
+        // this.y = y;
+        this.x = Math.random() * (this.ctx.canvas.width - this.width);
+        this.y = Math.random() * (this.ctx.canvas.height - this.height);
 
+        
+        this.health = health;
+        this.strength = strength;
+        
         this.nextMoveX;
         this.nextMoveY;
         this.vx;
         this.vy;
-
-        this.health = health;
-        this.strength = strength;
-
         this.v = 2;
+
         this.angle;
         this.airbendingAttacks = [];
         this.attackOn = true;
@@ -27,6 +28,7 @@ class Enemy extends Player {
         this.dx;
         this.dy;
 
+        this.move();
     }
 
     draw() {
@@ -53,26 +55,53 @@ class Enemy extends Player {
             return true;
         }
     }
+
     update(avatarX, avatarY) {
+        this.x = (this.vx * this.v);
+        this.y = (this.vy * this.v);
+
+        // if (this.x < 0 || this.x > this.ctx.canvas.width) {
+        //     this.ctx.canvas.width;
+        // } else if (this.y < 0 || this.y > this.ctx.canvas.height) {
+        //     this.ctx.canvas.height;
+        // }
+
+        if (Math.abs(this.nextMoveX - this.x) <= 10 && Math.abs(this.nextMoveY - this.y) <= 10) {
+            this.move(); // this.nextMove();
+        }
+
         this.dx = avatarX - this.x;
         this.dy = avatarY - this.y;
         this.angle = Math.atan2(this.dy, this.dx);
     }
 
     move() {
-        // this.x += this.vx;
-        this.x += 0;
-        this.y += 0;
+        function rand(a, b) {
+            return Math.floor(Math.random() * b + a);
+        }
+
+        // this.nextMoveX = Math.floor(Math.random() * (this.ctx.canvas.width + this.width));
+        // this.nextMoveY = Math.floor(Math.random() * (this.ctx.canvas.height + this.height));
+        this.nextMoveX = rand(0, this.ctx.canvas.width);
+        this.nextMoveY = rand(0, this.ctx.canvas.height);
+
+        let dx = this.nextMoveX - this.x;
+        let dy = this.nextMoveY - this.y;
+
+        let angle = Math.atan2(dy, dx);
+        this.vx = Math.cos(angle);
+        this.vy = Math.sin(angle);
     }
 
     // nextMove() {
     //     this.nextMoveX = rand(0, this.ctx.canvas.width);
     //     this.nextMoveY = rand(0, this.ctx.canvas.height);
 
-    //     let dx = this.x - this.nextMoveX;
-    //     let dy = this.y - this.nextMoveY;
+    //     let dx = this.nextMoveX - this.x;
+    //     let dy = this.nextMoveY - this.y;
+
     //     let angle = Math.atan2(dy, dx);
-    //     this.vx = Math.cose(angle);
+    //     this.vx = Math.cos(angle);
     //     this.vy = Math.sin(angle);
     // }
 }
