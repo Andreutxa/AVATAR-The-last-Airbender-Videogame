@@ -2,7 +2,7 @@ class Game {
     constructor (ctx) {
         this.ctx = ctx;
         this.intervalId = null;
-        this.player = new Player(ctx, 4, 2);
+        this.player = new Player(ctx, 100, 2);
         this.enemies = [];
         this.tick = 0;
 
@@ -24,6 +24,7 @@ class Game {
             this._draw();
             this._move();
             this._addEnemy();
+            this._checkColissions();
         }, 1000 / 60);
     }
 
@@ -61,10 +62,21 @@ class Game {
             this.enemies.some(enemy => enemy.collide(this.player))
         );
 
-        if (colission) {
+        const bendingColission = this.enemies.forEach(enemy => {
+            enemy.airbendingAttacks.some(attack => {
+                attack.collide(this.player);
+            });
+        });
+
+        debugger
+
+        if (colission && !this.player.hitted || bendingColission && !this.player.hitted) {
+            this.player.hitted = true;
             this.player.health--;
-            console.log('hello')
+            this.player.hittedUpdate();
+            console.log(this.player.health)
         }
+        
     }
     
 }

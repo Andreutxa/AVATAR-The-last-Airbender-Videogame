@@ -13,7 +13,8 @@ class Player {
         
         this.width = 50;
         this.height = 50;
-        
+
+        this.hitted = false;
         this.health = health;
         this.strength = strength;
 
@@ -28,26 +29,53 @@ class Player {
 
         this.img = new Image();
         this.img.src = './images/Aang-movements/Aang-DOWN.png';
-
-        this.spriteWidth = 215;
-        this.spriteHeight = 34;
-
         this.img.frames = 10;
+        this.img.frameIndex = 0;
+        this.tick = 0;
 
-        this.aangWidth = this.spriteWidth / this.img.frames;
 
     }
 
+    hittedUpdate() {
+        setTimeout(() => {
+            this.hitted = false;
+        }, 2000);
+    }
     
     draw() {
         
-        this.ctx.fillStyle = '#56AF2F';
-        this.ctx.fillRect(this.x, this.y, this.width, this.height);
+        // this.ctx.fillStyle = '#56AF2F';
+        // this.ctx.fillRect(this.x, this.y, this.width, this.height);
+
+        this.ctx.drawImage(
+            this.img,
+            this.img.frameIndex * this.img.width / this.img.frames,
+            0, 
+            this.img.width / this.img.frames,
+            this.img.height,
+            this.x,
+            this.y,
+            this.width,
+            this.height
+        )
         
         this.airbendingAttacks.forEach((attack) => {
             attack.draw();
             attack.move();
         });
+    }
+
+    animate() {
+        this.tick++;
+
+        if (this.tick > 8) {
+            this.tick = 0;
+            this.frameIndex++
+        }
+
+        if (this.img.frameIndex >= this.img.frames) {
+            this.img.frameIndex = 0;
+        }
     }
     
     update(mouseX, mouseY) {

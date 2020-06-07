@@ -30,5 +30,13 @@ class Airbending {
         this.x += this.dx;
         this.y += this.dy;
     }
+
+    collide(player) {
+        const collideX = player.x + player.width > this.x && player.x < this.x + this.width;
+        const collideY = player.y < this.y + this.height && player.y + player.height > this.y;
+
+        return collideX && collideY;
+
+    }
     
 }
