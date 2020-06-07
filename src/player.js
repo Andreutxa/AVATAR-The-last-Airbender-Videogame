@@ -44,20 +44,20 @@ class Player {
     
     draw() {
         
-        // this.ctx.fillStyle = '#56AF2F';
-        // this.ctx.fillRect(this.x, this.y, this.width, this.height);
+        this.ctx.fillStyle = '#56AF2F';
+        this.ctx.fillRect(this.x, this.y, this.width, this.height);
 
-        this.ctx.drawImage(
-            this.img,
-            this.img.frameIndex * this.img.width / this.img.frames,
-            0, 
-            this.img.width / this.img.frames,
-            this.img.height,
-            this.x,
-            this.y,
-            this.width,
-            this.height
-        )
+        // this.ctx.drawImage(
+        //     this.img,
+        //     this.img.frameIndex * this.img.width / this.img.frames,
+        //     0, 
+        //     this.img.width / this.img.frames,
+        //     this.img.height,
+        //     this.x,
+        //     this.y,
+        //     this.width,
+        //     this.height
+        // );
         
         this.airbendingAttacks.forEach((attack) => {
             attack.draw();
@@ -65,18 +65,18 @@ class Player {
         });
     }
 
-    animate() {
-        this.tick++;
+    // animate() {
+    //     this.tick++;
 
-        if (this.tick > 8) {
-            this.tick = 0;
-            this.frameIndex++
-        }
+    //     if (this.tick > 8) {
+    //         this.tick = 0;
+    //         this.frameIndex++
+    //     }
 
-        if (this.img.frameIndex >= this.img.frames) {
-            this.img.frameIndex = 0;
-        }
-    }
+    //     if (this.img.frameIndex >= this.img.frames) {
+    //         this.img.frameIndex = 0;
+    //     }
+    // }
     
     update(mouseX, mouseY) {
         this.dx = mouseX - this.x;
