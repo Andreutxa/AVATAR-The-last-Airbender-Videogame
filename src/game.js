@@ -98,8 +98,6 @@ class Game {
             console.log(this.player.health);
         }
 
-        
-        
     }
     
 }
