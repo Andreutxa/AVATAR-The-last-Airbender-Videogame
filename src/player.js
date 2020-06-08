@@ -11,8 +11,8 @@ class Player {
         this.vx = 0;
         this.vy = 0;
         
-        this.width = 30;
-        this.height = 50;
+        this.width = 40;
+        this.height = 60;
 
         this.hitted = false;
         this.health = health;
@@ -27,11 +27,10 @@ class Player {
         this.dx;
         this.dy;
 
-        this.img = this.imgStill;
-        this.imgStill = new Image();
-        this.imgStill.src = './images/Aang-movements/Aang-still.png';
-        this.imgStill.frames = 1;
-        this.imgStill.frameIndex = 0;
+        this.img = new Image();
+        this.img.src = './images/Aang-movements/Aang-still.png';
+        this.img.frames = 1;
+        this.img.frameIndex = 0;
 
         this.imgRight = new Image();
         this.imgRight.src = './images/Aang-movements/Aang-RIGHT.png';
@@ -45,13 +44,20 @@ class Player {
 
         this.imgUp = new Image();
         this.imgUp.src = './images/Aang-movements/Aang-UP.png';
-        this.imgUp.frames = 10;
+        this.imgUp.frames = 11;
         this.imgUp.frameIndex = 0;
 
         this.imgDown = new Image();
         this.imgDown.src = './images/Aang-movements/Aang-DOWN.png';
-        this.imgDown.frames = 11;
+        this.imgDown.frames = 10;
         this.imgDown.frameIndex = 0;
+
+        this.actions = {
+            up: false,
+            down: false,
+            left: false,
+            right: false
+        };
     
         this.tick = 0
 
@@ -65,95 +71,83 @@ class Player {
     
     draw() {
         
-        // this.ctx.fillStyle = '#56AF2F';
-        // this.ctx.fillRect(this.x, this.y, this.width, this.height);   
-
-        // this.ctx.drawImage(
-        //     this.img,
-        //     this.x,
-        //     this.y,
-        //     this.width,
-        //     this.height
-        //   );
-      
-
-        document.addEventListener('keydown', key => {
-            if (key.keyCode === UP || key.keyCode === W) {
-                this.img = this.imgUp;
-                    this.ctx.drawImage(
-                    this.img,
-                    this.img.frameIndex * this.img.width / this.img.frames,
-                    0,
-                    this.img.width / this.img.frames,
-                    this.img.height,
-                    this.x,
-                    this.y,
-                    this.width,
-                    this.height
-                    );
-                this.animate();
-            } else if (key.keyCode === DOWN || key.keyCode === S) {
-                this.img = this.imgDown;
-                this.ctx.drawImage(
-                    this.img,
-                    this.img.frameIndex * this.img.width / this.img.frames,
-                    0,
-                    this.img.width / this.img.frames,
-                    this.img.height,
-                    this.x,
-                    this.y,
-                    this.width,
-                    this.height
-                    );
-                this.animate();
-            } else if (key.keyCode === LEFT || key.keyCode === A) {
-                this.img = this.imgLeft;
-                this.ctx.drawImage(
-                    this.img,
-                    this.img.frameIndex * this.img.width / this.img.frames,
-                    0,
-                    this.img.width / this.img.frames,
-                    this.img.height,
-                    this.x,
-                    this.y,
-                    this.width,
-                    this.height
-                    );
-                this.animate();
-            } else if (key.keyCode === RIGHT || key.keyCode === D) {
-                this.img = this.imgRight;
-                this.ctx.drawImage(
-                    this.img,
-                    this.img.frameIndex * this.img.width / this.img.frames,
-                    0,
-                    this.img.width / this.img.frames,
-                    this.img.height,
-                    this.x,
-                    this.y,
-                    this.width,
-                    this.height
-                    );
-                this.animate();
-            } 
-         });
-
-
+        if (this.actions.up) {
+            this.ctx.drawImage(
+            this.imgUp,
+            this.imgUp.frameIndex * this.imgUp.width / this.imgUp.frames,
+            0,
+            this.imgUp.width / this.imgUp.frames,
+            this.imgUp.height,
+            this.x,
+            this.y,
+            this.width,
+            this.height
+            );
+            this.animate(this.imgUp);
+        } else if (this.actions.down) {
+            this.ctx.drawImage(
+                this.imgDown,
+                this.imgDown.frameIndex * this.imgDown.width / this.imgDown.frames,
+                0,
+                this.imgDown.width / this.imgDown.frames,
+                this.imgDown.height,
+                this.x,
+                this.y,
+                this.width,
+                this.height
+                );
+            this.animate(this.imgDown);
+        } else if (this.actions.left) {
+            this.ctx.drawImage(
+                this.imgLeft,
+                this.imgLeft.frameIndex * this.imgLeft.width / this.imgLeft.frames,
+                0,
+                this.imgLeft.width / this.imgLeft.frames,
+                this.imgLeft.height,
+                this.x,
+                this.y,
+                this.width,
+                this.height
+                );
+            this.animate(this.imgLeft);
+        } else if (this.actions.right) {
+            this.ctx.drawImage(
+                this.imgRight,
+                this.imgRight.frameIndex *  this.imgRight.width /  this.imgRight.frames,
+                0,
+                this.imgRight.width /  this.imgRight.frames,
+                this.imgRight.height,
+                this.x,
+                this.y,
+                this.width,
+                this.height
+                );
+            this.animate(this.imgRight);
+        } else {
+            this.ctx.drawImage(
+                this.img,
+                this.x,
+                this.y,
+                this.width,
+                this.height
+            );
+        }
         this.airbendingAttacks.forEach((attack) => {
             attack.draw();
             attack.move();
         });
     }
 
-    animate() {
+    animate(img) {
 
-        if (this.tick++ > 7) {
+        if (this.tick++ > 15) {
           this.tick = 0;
-    
-          this.img.frameIndex++;
+            
+          img.frameIndex++;
         }
     
-        if (this.img.frameIndex >= this.img.frames - 1) {
-          this.img.frameIndex = 0;
+        if (img.frameIndex >= img.frames - 1) {
+          img.frameIndex = 0;
         }
     }
     
@@ -191,30 +185,39 @@ class Player {
         });
 
         document.addEventListener('keydown', key => {
-           if (key.keyCode === UP || key.keyCode === W) {
-               this.vy = -4;
-           } else if (key.keyCode === DOWN || key.keyCode === S) {
-               this.vy = 4;
-           } else if (key.keyCode === LEFT || key.keyCode === A) {
-               this.vx = -4;
-           } else if (key.keyCode === RIGHT || key.keyCode === D) {
-               this.vx = 4;
-           } else if (key.keyCode === SPACE) {
-               this.attack();
-           }
-        });
-
-        document.addEventListener('keyup', key => {
-            if (key.keyCode === UP || key.keyCode === W) {
-                this.vy = 0;
-            } else if (key.keyCode === DOWN || key.keyCode === S) {
-                this.vy = 0;
-            } else if (key.keyCode === LEFT || key.keyCode === A) {
-                this.vx = 0;
-            } else if (key.keyCode === RIGHT || key.keyCode === D) {
-                this.vx = 0;
-            }
-         });
+            var state = key.type === 'keydown' ? true : false;
+              if (key.keyCode === UP || key.keyCode === W) {
+                  this.actions.up = true
+                  this.vy = -4;
+              } else if (key.keyCode === DOWN || key.keyCode === S) {
+                  this.actions.down = true
+                  this.vy = 4;
+              } else if (key.keyCode === LEFT || key.keyCode === A) {
+                  this.actions.left = true
+                  this.vx = -4;
+              } else if (key.keyCode === RIGHT || key.keyCode === D) {
+                  this.actions.right = true
+                  this.vx = 4;
+              } else if (key.keyCode === SPACE) {
+                  this.attack();
+              }
+           });
+   
+           document.addEventListener('keyup', key => {
+               if (key.keyCode === UP || key.keyCode === W) {
+                   this.actions.up = false
+                   this.vy = 0;
+               } else if (key.keyCode === DOWN || key.keyCode === S) {
+                   this.actions.down = false
+                   this.vy = 0;
+               } else if (key.keyCode === LEFT || key.keyCode === A) {
+                   this.actions.left = false
+                   this.vx = 0;
+               } else if (key.keyCode === RIGHT || key.keyCode === D) {
+                   this.actions.right = false
+                   this.vx = 0;
+               }
+            });
 
         this.x += this.vx;
         this.y += this.vy;
@@ -231,13 +234,5 @@ class Player {
         //     game over
         // }
     }
-
-    // collide(player) {
-    //     const collideX = player.x + player.width > this.x && player.x < this.x + this.width;
-    //     const collideY = player.y < this.y + this.height && player.y + player.height > this.y;
-
-    //     return collideX && collideY;
-        
-    // }
 
 }
