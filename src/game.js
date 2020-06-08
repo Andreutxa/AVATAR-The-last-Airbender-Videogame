@@ -24,7 +24,7 @@ class Game {
             this._draw();
             this._move();
             this._addEnemy();
-            this._checkColissions();
+            this._checkCollisions();
         }, 1000 / 60);
     }
 
@@ -57,24 +57,49 @@ class Game {
         
     }
 
-    _checkColissions() {
-        const colission = (
+    _checkCollisions() {
+        const collision = (
             this.enemies.some(enemy => enemy.collide(this.player))
         );
-
-        const bendingColission = this.enemies.forEach(enemy => {
-            enemy.airbendingAttacks.some(attack => {
-                attack.collide(this.player);
+        
+        const bendingCollision = this.enemies.some(enemy => {
+            return enemy.airbendingAttacks.some(attack => {
+                if (attack.collide(this.player)) {
+                    let index = enemy.airbendingAttacks.indexOf(attack);
+                    enemy.airbendingAttacks.splice(index, 1);
+                    return true;
+                } 
             });
         });
 
-        debugger
+        const attacksArr = this.player.airbendingAttacks;
+        const bendingCollisionWithEnemy = attacksArr.some(attack => {
+            if (attack.collide(this.enemies.some(enemy => enemy))) {
+                let index2 = attacksArr.indexOf(attack);
+                attacksArr.splice(index2, 1);
+                return true;
+            } 
+        });
+        console.log(bendingCollisionWithEnemy);
+        
+        // const bendingCollisionWithEnemy = this.player.airbendingAttacks.some(attack => {
+        //     attack.collide(this.enemies);
+        // });
 
-        if (colission && !this.player.hitted || bendingColission && !this.player.hitted) {
+        // const bendingCollisionWithEnemy = this.enemies.some(enemy => {
+        //     enemy.collide(this.player.airbendingAttacks)
+        // })
+
+        if (collision && !this.player.hitted || bendingCollision && !this.player.hitted || bendingCollisionWithEnemy && !this.enemies.hitted) {
             this.player.hitted = true;
             this.player.health--;
             this.player.hittedUpdate();
-            console.log(this.player.health)
+            this.enemies.forEach(enemy => {
+                enemy.hitted;
+                enemy.health--;
+                enemy.hittedUpdate();
+            });
+            console.log(this.player.health);
         }
         
     }

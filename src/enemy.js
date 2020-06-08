@@ -29,6 +29,14 @@ class Enemy extends Player {
         this.dy;
 
         this.move();
+
+        this.hitted = false;
+    }
+
+    hittedUpdate() {
+        setTimeout(() => {
+            this.hitted = false;
+        }, 1000);
     }
 
     draw() {
@@ -99,7 +107,7 @@ class Enemy extends Player {
         const collideY = player.y < this.y + this.height && player.y + player.height > this.y;
 
         return collideX && collideY;
-        
+
     }
 
 }
