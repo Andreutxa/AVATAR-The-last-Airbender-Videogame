@@ -65,21 +65,66 @@ class Game {
         );
         
         const bendingCollision = this.enemies.some(enemy => {
-            return enemy.airbendingAttacks.some(attack => {
+            return enemy.firebendingAttacks.some(attack => {
                 if (attack.collide(this.player)) {
-                    let index = enemy.airbendingAttacks.indexOf(attack);
-                    enemy.airbendingAttacks.splice(index, 1);
+                    let index = enemy.firebendingAttacks.indexOf(attack);
+                    enemy.firebendingAttacks.splice(index, 1);
                     return true;
                 } 
             });
         });
 
-        const attacksArr = this.player.airbendingAttacks;
-        const bendingCollisionWithEnemy = this.enemies.some(enemy => {
-            return attacksArr.some(attack => {
+        const airAttacks = this.player.airbendingAttacks;
+        const airBendingCollisionWithEnemy = this.enemies.some(enemy => {
+            return airAttacks.some(attack => {
                 if (attack.collide(enemy)) {
-                    let index = attacksArr.indexOf(attack);
-                    attacksArr.splice(index, 1);
+                    let index = airAttacks.indexOf(attack);
+                    airAttacks.splice(index, 1);
+                    enemy.hitted = true;
+                    enemy.health--;
+                    enemy.hittedUpdate();
+                    console.log(enemy.health);
+                    return true;
+                } 
+            });
+        });
+        
+        const waterAttacks = this.player.waterbendingAttacks;
+        const waterBendingCollisionWithEnemy = this.enemies.some(enemy => {
+            return waterAttacks.some(attack => {
+                if (attack.collide(enemy)) {
+                    let index = waterAttacks.indexOf(attack);
+                    waterAttacks.splice(index, 1);
+                    enemy.hitted = true;
+                    enemy.health--;
+                    enemy.hittedUpdate();
+                    console.log(enemy.health);
+                    return true;
+                } 
+            });
+        });
+        
+        const earthAttacks = this.player.earthbendingAttacks;
+        const earthBendingCollisionWithEnemy = this.enemies.some(enemy => {
+            return earthAttacks.some(attack => {
+                if (attack.collide(enemy)) {
+                    let index = earthAttacks.indexOf(attack);
+                    earthAttacks.splice(index, 1);
+                    enemy.hitted = true;
+                    enemy.health--;
+                    enemy.hittedUpdate();
+                    console.log(enemy.health);
+                    return true;
+                } 
+            });
+        });
+        
+        const fireAttacks = this.player.firebendingAttacks;
+        const fireBendingCollisionWithEnemy = this.enemies.some(enemy => {
+            return fireAttacks.some(attack => {
+                if (attack.collide(enemy)) {
+                    let index = fireAttacks.indexOf(attack);
+                    fireAttacks.splice(index, 1);
                     enemy.hitted = true;
                     enemy.health--;
                     enemy.hittedUpdate();

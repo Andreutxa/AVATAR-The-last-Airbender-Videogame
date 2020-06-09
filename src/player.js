@@ -21,6 +21,9 @@ class Player {
         
         this.angle;
         this.airbendingAttacks = [];
+        this.waterbendingAttacks = [];
+        this.earthbendingAttacks = [];
+        this.firebendingAttacks = [];
         this.attackOn = true;
         this.attackInterval = 300;
         
@@ -44,7 +47,7 @@ class Player {
 
         this.imgUp = new Image();
         this.imgUp.src = './images/Aang-movements/Aang-UP.png';
-        this.imgUp.frames = 11;
+        this.imgUp.frames = 4;
         this.imgUp.frameIndex = 0;
 
         this.imgDown = new Image();
@@ -59,7 +62,9 @@ class Player {
             right: false
         };
     
-        this.tick = 0
+        this.tick = 0;
+
+        this.windAudio = document.getElementById('wind');
 
     }
 
@@ -136,6 +141,18 @@ class Player {
             attack.draw();
             attack.move();
         });
+        this.earthbendingAttacks.forEach((attack) => {
+            attack.draw();
+            attack.move();
+        });
+        this.waterbendingAttacks.forEach((attack) => {
+            attack.draw();
+            attack.move();
+        });
+        this.firebendingAttacks.forEach((attack) => {
+            attack.draw();
+            attack.move();
+        });
     }
 
     animate(img) {
@@ -157,7 +174,7 @@ class Player {
         this.angle = Math.atan2(this.dy, this.dx);
     }
     
-    attack() {
+    airAttack() {
          
         if (this.attackOn) {
             let dx = Math.cos(this.angle);
@@ -165,6 +182,56 @@ class Player {
 
             let airbending = new Airbending(this.ctx, this.angle, this.x + this.width / 2, this.y + this.height / 2, dx, dy);
             this.airbendingAttacks.push(airbending); 
+
+            this.windAudio.play();
+
+            this.attackOn = false;
+            this.reload();
+            return true;
+        }
+    }
+    waterAttack() {
+         
+        if (this.attackOn) {
+            let dx = Math.cos(this.angle);
+            let dy = Math.sin(this.angle);
+
+            let waterbending = new Waterbending(this.ctx, this.angle, this.x + this.width / 2, this.y + this.height / 2, dx, dy);
+            this.waterbendingAttacks.push(waterbending); 
+
+            // this.windAudio.play();
+
+            this.attackOn = false;
+            this.reload();
+            return true;
+        }
+    }
+    earthAttack() {
+         
+        if (this.attackOn) {
+            let dx = Math.cos(this.angle);
+            let dy = Math.sin(this.angle);
+
+            let earthbending = new Earthbending(this.ctx, this.angle, this.x + this.width / 2, this.y + this.height / 2, dx, dy);
+            this.earthbendingAttacks.push(earthbending); 
+
+            // this.windAudio.play();
+
+            this.attackOn = false;
+            this.reload();
+            return true;
+        }
+    }
+    fireAttack() {
+         
+        if (this.attackOn) {
+            let dx = Math.cos(this.angle);
+            let dy = Math.sin(this.angle);
+
+            let firebending = new Firebending(this.ctx, this.angle, this.x + this.width / 2, this.y + this.height / 2, dx, dy);
+            this.firebendingAttacks.push(firebending); 
+
+            // this.windAudio.play();
 
             this.attackOn = false;
             this.reload();
@@ -181,7 +248,7 @@ class Player {
     move() {
 
         document.addEventListener('mousedown', () => {
-           this.attack(); 
+           this.airAttack(); 
         });
 
         document.addEventListener('keydown', key => {
@@ -199,7 +266,13 @@ class Player {
                   this.actions.right = true
                   this.vx = 4;
               } else if (key.keyCode === SPACE) {
-                  this.attack();
+                  this.airAttack();
+              }else if (key.keyCode === E) {
+                  this.earthAttack();
+              }else if (key.keyCode === R) {
+                  this.waterAttack();
+              }else if(key.keyCode === F) {
+                  this.fireAttack();
               }
            });
    

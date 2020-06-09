@@ -7,6 +7,9 @@ const D = 68;
 const LEFT = 37;
 const A = 65;
 const SPACE = 32;
+const E = 69;
+const R = 82;
+const F = 70;
 
 function rand(a, b) {
     return Math.floor(Math.random() * b + a);

@@ -17,7 +17,7 @@ class Airbending {
     draw() {
         this.ctx.save();
 
-        this.ctx.fillStyle = 'blue';
+        this.ctx.fillStyle = 'grey';
         this.ctx.translate(this.x, this.y);
         this.ctx.rotate(this.angle);
         this.ctx.fillRect(-15, -5, this.width, this.height);
