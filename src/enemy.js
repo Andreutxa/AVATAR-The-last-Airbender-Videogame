@@ -2,8 +2,8 @@ class Enemy extends Player {
     constructor (ctx, health, strength, x, y) {
         super(ctx,health, strength);
 
-        this.width = 50;
-        this.height = 50;
+        this.width = 65;
+        this.height = 70;
 
         // this.x = x;
         // this.y = y;
@@ -32,6 +32,11 @@ class Enemy extends Player {
 
         this.hitted = false;
 
+        this.img = new Image();
+        this.img.src = './images/fire-nation-enemy.png';
+        this.img.frames = 4;
+        this.img.frameIndex = 0;
+
     }
 
     hittedUpdate() {
@@ -41,8 +46,20 @@ class Enemy extends Player {
     }
 
     draw() {
-        this.ctx.fillStyle = '#8A4588';
-        this.ctx.fillRect(this.x, this.y, this.width, this.height);
+        // this.ctx.fillStyle = '#8A4588';
+        // this.ctx.fillRect(this.x, this.y, this.width, this.height);
+        this.ctx.drawImage(
+            this.img,
+            this.img.frameIndex * this.img.width / this.img.frames,
+            0,
+            this.img.width / this.img.frames,
+            this.img.height,
+            this.x,
+            this.y,
+            this.width,
+            this.height
+          );
+        
 
         this.firebendingAttacks.forEach(attack => {
             attack.draw();

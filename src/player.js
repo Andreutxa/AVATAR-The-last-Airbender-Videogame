@@ -65,6 +65,9 @@ class Player {
         this.tick = 0;
 
         this.windAudio = document.getElementById('wind');
+        this.waterAudio = document.getElementById('water');
+        this.earthAudio = document.getElementById('earth');
+        this.fireAudio = document.getElementById('fire');
 
     }
 
@@ -199,7 +202,7 @@ class Player {
             let waterbending = new Waterbending(this.ctx, this.angle, this.x + this.width / 2, this.y + this.height / 2, dx, dy);
             this.waterbendingAttacks.push(waterbending); 
 
-            // this.windAudio.play();
+            this.waterAudio.play();
 
             this.attackOn = false;
             this.reload();
@@ -215,7 +218,7 @@ class Player {
             let earthbending = new Earthbending(this.ctx, this.angle, this.x + this.width / 2, this.y + this.height / 2, dx, dy);
             this.earthbendingAttacks.push(earthbending); 
 
-            // this.windAudio.play();
+            this.earthAudio.play();
 
             this.attackOn = false;
             this.reload();
@@ -231,7 +234,7 @@ class Player {
             let firebending = new Firebending(this.ctx, this.angle, this.x + this.width / 2, this.y + this.height / 2, dx, dy);
             this.firebendingAttacks.push(firebending); 
 
-            // this.windAudio.play();
+            this.fireAudio.play();
 
             this.attackOn = false;
             this.reload();

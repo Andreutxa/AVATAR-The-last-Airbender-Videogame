@@ -3,6 +3,7 @@ class Game {
         this.ctx = ctx;
         this.intervalId = null;
         this.player = new Player(ctx, 100, 2);
+        this.round = new Round(ctx);
         this.enemies = [];
         this.tick = 0;
 
@@ -24,7 +25,9 @@ class Game {
             this._draw();
             this._move();
             this._addEnemy();
+            // this._nextRound();
             this._checkCollisions();
+            this._checkPlayerEnemiesLife();
         }, 1000 / 60);
     }
 
@@ -37,12 +40,14 @@ class Game {
         this.player.draw();
         this.player.update(this.mouseX, this.mouseY);
 
+        // this.round.drawEnemies();
+
         this.enemies.forEach(enemy => {
             if(enemy.health > 0) {
                 enemy.draw();
-            }    
-            enemy.update(this.player.x, this.player.y);
-            enemy.attack();
+                enemy.update(this.player.x, this.player.y);
+                enemy.attack();
+            }   
           });
         
     }
@@ -53,6 +58,29 @@ class Game {
             this.enemies.push(new Enemy(ctx, 3, 1,));
         }
     }
+    // _addEnemy() {
+    //     if (this.tick++ < 15 && this.round.round === 1) {
+    //         this.round.enemies.push(new Enemy(ctx, 3, 1,));
+    //     }
+
+    //     if (this.tick++ < 7 && this.round.round === 2) {
+    //         this.round.enemies.push(new Enemy(ctx, 7, 5,));
+    //     }
+
+    //     if (this.tick++ < 3 && this.round.round === 3) {
+    //         this.round.enemies.push(new Enemy(ctx, 15, 5,));
+    //     }
+
+    //     if (this.tick++ < 1 && this.round.round === 4) {
+    //         this.round.enemies.push(new Enemy(ctx, 25, 15,));
+    //     }
+    // }
+
+    // _nextRound() {
+    //     if (this.round.enemies.length === 0) {
+    //         this.round++;
+    //     }
+    // }
     
     _move() {
         this.player.move();
@@ -143,6 +171,33 @@ class Game {
             console.log(this.player.health);
         }
 
+    }
+
+    _loose() {
+        clearInterval(this.intervalId);
+        setTimeout(() => {
+            this.round.gameOver();
+        }, 1000);
+    }
+
+    _win() {
+        clearInterval(this.intervalId);
+        setTimeout(() => {
+            this.round.winGame();
+        }, 1000);
+    }
+
+    _checkPlayerEnemiesLife() {
+        if (this.player.health === 0) {
+            this._loose();
+        } else if (this.enemies.length === 0) {
+            this._win();
+        }
+        // if (this.player.health === 0) {
+        //     this._loose();
+        // } else if (this.round.enemies.length === 0 && this.round.round === 4) {
+        //     this._win();
+        // }
     }
     
 }
