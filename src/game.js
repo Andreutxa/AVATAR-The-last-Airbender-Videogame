@@ -2,17 +2,29 @@ class Game {
     constructor (ctx) {
         this.ctx = ctx;
         this.intervalId = null;
-        this.player = new Player(ctx, 100, 2);
-        this.round = new Round(ctx);
+        this.player = new Player(ctx, 50, 2);
+        this.round = 0;
         this.enemies = [];
         this.tick = 0;
 
         this.mouseX;
         this.mouseY;
         this.setListeners();
+ 
+        this.points = [];
+        this.score = 0;
+
+        this.winImg = new Image();
+        this.winImg.src = './images/winImg.png';
+        this.winAudio = document.getElementById('win-sound');
+
+        this.gameOverImg = new Image();
+        this.gameOverImg.src = './images/gameOverImg.png';
+        this.gameOverAudio = document.getElementById('game-over-sound');
     }
 
     setListeners() {
+        console.log(LIFE_ELEMENT.value)
         document.addEventListener('mousemove', (evt) => {
             this.mouseX = evt.clientX - 25;
             this.mouseY = evt.clientY - 25;
@@ -24,10 +36,11 @@ class Game {
             this._clear();
             this._draw();
             this._move();
-            this._addEnemy();
-            // this._nextRound();
+
             this._checkCollisions();
             this._checkPlayerEnemiesLife();
+            this._checkRound();
+            // this.updateScore();
         }, 1000 / 60);
     }
 
@@ -40,51 +53,65 @@ class Game {
         this.player.draw();
         this.player.update(this.mouseX, this.mouseY);
 
-        // this.round.drawEnemies();
-
         this.enemies.forEach(enemy => {
             if(enemy.health > 0) {
                 enemy.draw();
                 enemy.update(this.player.x, this.player.y);
                 enemy.attack();
-            }   
-          });
+            }    
+        });
+
+        this.points.forEach(point => {
+            point.draw();
+        });
         
     }
-    
-    _addEnemy() {
-        
-        if (this.tick++ < 5) {
-            this.enemies.push(new Enemy(ctx, 3, 1,));
+
+    _checkRound() {
+        if (this.enemies.length === 0 && this.round === 0) {
+            this._addEnemies(0, 15);
+            this.round = 1;
+        } else if (this.enemies.length === 0 && this.round === 1) {
+            this._addEnemies(1, 7);
+            this.round = 2;
+        } else if (this.enemies.length === 0 && this.round === 2) {
+            this._addEnemies(2, 3);
+            this.round = 3;
+        } else if (this.enemies.length === 0 && this.round === 3) {
+            this._addEnemies(3, 1);
+            this.round = 4;
+        } else if (this.enemies.length === 0 && this.round === 4) {
+            this._win();
         }
     }
-    // _addEnemy() {
-    //     if (this.tick++ < 15 && this.round.round === 1) {
-    //         this.round.enemies.push(new Enemy(ctx, 3, 1,));
-    //     }
 
-    //     if (this.tick++ < 7 && this.round.round === 2) {
-    //         this.round.enemies.push(new Enemy(ctx, 7, 5,));
-    //     }
-
-    //     if (this.tick++ < 3 && this.round.round === 3) {
-    //         this.round.enemies.push(new Enemy(ctx, 15, 5,));
-    //     }
-
-    //     if (this.tick++ < 1 && this.round.round === 4) {
-    //         this.round.enemies.push(new Enemy(ctx, 25, 15,));
-    //     }
-    // }
-
-    // _nextRound() {
-    //     if (this.round.enemies.length === 0) {
-    //         this.round++;
-    //     }
-    // }
+    _addEnemies(roundNum, enemyNum) {
+        switch(roundNum) {
+            case 0:
+                while(this.enemies.length < enemyNum) {
+                    this.enemies.push(new Enemy(ctx, 3, 1));
+                }
+            break;
+            case 1:
+                while(this.enemies.length < enemyNum) {
+                    this.enemies.push(new Enemy(ctx, 7, 5));
+                }
+            break;
+            case 2:
+                while(this.enemies.length < enemyNum) {
+                    this.enemies.push(new Enemy(ctx, 15, 5));
+                }
+            break;
+            case 3:
+                while(this.enemies.length < enemyNum) {
+                    this.enemies.push(new Enemy(ctx, 25, 15));
+                }
+            break;
+        }
+    }
     
     _move() {
         this.player.move();
-        
     }
 
     _checkCollisions() {
@@ -111,6 +138,11 @@ class Game {
                     enemy.hitted = true;
                     enemy.health--;
                     enemy.hittedUpdate();
+                    if (enemy.health <= 0) {
+                        let index = this.enemies.indexOf(enemy);
+                        this.enemies.splice(index, 1);
+                        this.score += enemy.strength;
+                    }
                     console.log(enemy.health);
                     return true;
                 } 
@@ -126,6 +158,11 @@ class Game {
                     enemy.hitted = true;
                     enemy.health--;
                     enemy.hittedUpdate();
+                    if (enemy.health <= 0) {
+                        let index = this.enemies.indexOf(enemy);
+                        this.enemies.splice(index, 1);
+                        this.score += enemy.strength;
+                    }
                     console.log(enemy.health);
                     return true;
                 } 
@@ -141,6 +178,11 @@ class Game {
                     enemy.hitted = true;
                     enemy.health--;
                     enemy.hittedUpdate();
+                    if (enemy.health <= 0) {
+                        let index = this.enemies.indexOf(enemy);
+                        this.enemies.splice(index, 1);
+                        this.score += enemy.strength;
+                    }
                     console.log(enemy.health);
                     return true;
                 } 
@@ -156,6 +198,11 @@ class Game {
                     enemy.hitted = true;
                     enemy.health--;
                     enemy.hittedUpdate();
+                    if (enemy.health <= 0) {
+                        let index = this.enemies.indexOf(enemy);
+                        this.enemies.splice(index, 1);
+                        this.score += enemy.strength;
+                    }
                     console.log(enemy.health);
                     return true;
                 } 
@@ -171,33 +218,76 @@ class Game {
             console.log(this.player.health);
         }
 
-    }
+        const pointsCollision = this.enemies.some(enemy => {
+            if (enemy.health === 0) { 
+                this.points.push(new Paisho(ctx, enemy.x, enemy.y));
+                this.points.some(point => {
+                    if(point.collide(this.player)) {
+                        this.score += point.value;
+                        let indexCoins = this.points.indexOf(point);
+                        this.points.splice(indexCoins, 1);
+                    }
+                });
+            }
+        });
 
+    }
+    winGame() {
+        this.ctx.drawImage(
+            this.winImg, 
+            0, 
+            0, 
+            this.ctx.canvas.width, 
+            this.ctx.canvas.height
+        );
+        this.ctx.font = '50px Herculanum';
+        this.ctx.fillStyle = '#FFFFFF';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillText('Congratulations, Avatar', this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
+    }
+    
+    gameOver() {
+        battleAudio.pause();
+        this.gameOverAudio.play();
+        
+        this.ctx.drawImage(
+            this.gameOverImg, 
+            0, 
+            0, 
+            this.ctx.canvas.width, 
+            this.ctx.canvas.height
+        );
+        this.ctx.font = '50px Herculanum';
+        this.ctx.fillStyle = '#FFFFFF';
+        this.ctx.textAlign = 'right';
+        this.ctx.fillText('Game Over', this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
+    }
+    
     _loose() {
-        clearInterval(this.intervalId);
+       
         setTimeout(() => {
-            this.round.gameOver();
+            this.gameOver();
         }, 1000);
+        clearInterval(this.intervalId);
     }
 
     _win() {
         clearInterval(this.intervalId);
         setTimeout(() => {
-            this.round.winGame();
+            this.winGame();
         }, 1000);
     }
 
     _checkPlayerEnemiesLife() {
         if (this.player.health === 0) {
             this._loose();
-        } else if (this.enemies.length === 0) {
+        } else if (this.enemies.length === 0  && this.round === 4) {
             this._win();
         }
-        // if (this.player.health === 0) {
-        //     this._loose();
-        // } else if (this.round.enemies.length === 0 && this.round.round === 4) {
-        //     this._win();
-        // }
+    }
+
+    updateScore() {
+        SCORE.innerText = this.score;
     }
     
 }

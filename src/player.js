@@ -11,7 +11,7 @@ class Player {
         this.vx = 0;
         this.vy = 0;
         
-        this.width = 40;
+        this.width = 50;
         this.height = 60;
 
         this.hitted = false;
@@ -31,27 +31,27 @@ class Player {
         this.dy;
 
         this.img = new Image();
-        this.img.src = './images/Aang-movements/Aang-still.png';
+        this.img.src = './images/Aang-movements/Aang-still1.png';
         this.img.frames = 1;
         this.img.frameIndex = 0;
 
         this.imgRight = new Image();
-        this.imgRight.src = './images/Aang-movements/Aang-RIGHT.png';
+        this.imgRight.src = './images/Aang-movements/Aang-RIGHT1.png';
         this.imgRight.frames = 4;
         this.imgRight.frameIndex = 0;
 
         this.imgLeft = new Image();
-        this.imgLeft.src = './images/Aang-movements/Aang-LEFT.png';
+        this.imgLeft.src = './images/Aang-movements/Aang-LEFT1.png';
         this.imgLeft.frames = 4;
         this.imgLeft.frameIndex = 0;
 
         this.imgUp = new Image();
-        this.imgUp.src = './images/Aang-movements/Aang-UP.png';
-        this.imgUp.frames = 4;
+        this.imgUp.src = './images/Aang-movements/Aang-UP1.png';
+        this.imgUp.frames = 10;
         this.imgUp.frameIndex = 0;
 
         this.imgDown = new Image();
-        this.imgDown.src = './images/Aang-movements/Aang-DOWN.png';
+        this.imgDown.src = './images/Aang-movements/Aang-DOWN1.png';
         this.imgDown.frames = 10;
         this.imgDown.frameIndex = 0;
 
@@ -136,7 +136,7 @@ class Player {
                 this.img,
                 this.x,
                 this.y,
-                this.width,
+                this.width - 15,
                 this.height
             );
         }
@@ -160,7 +160,7 @@ class Player {
 
     animate(img) {
 
-        if (this.tick++ > 15) {
+        if (this.tick++ > 10) {
           this.tick = 0;
             
           img.frameIndex++;
