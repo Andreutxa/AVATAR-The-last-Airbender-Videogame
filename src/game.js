@@ -2,7 +2,8 @@ class Game {
     constructor (ctx) {
         this.ctx = ctx;
         this.intervalId = null;
-        this.player = new Player(ctx, 10, 2);
+        this.player = new Player(ctx, 50, 2);
+        this.background = new Background(ctx);
         this.round = 0;
         this.enemies = [];
         this.tick = 0;
@@ -50,6 +51,7 @@ class Game {
 
     
     _draw() {
+        this.background.draw();
         this.player.draw();
         this.player.update(this.mouseX, this.mouseY);
 
@@ -236,7 +238,7 @@ class Game {
         battleAudio.pause();
 
         this.winAudio.play();
-        // WIN_BOX.classList.toggle('hide');
+        WIN_BOX.classList.toggle('hide');
         PLAY_AGAIN_BTN.addEventListener('click', () => {
             window.location.reload();
             });
@@ -258,16 +260,16 @@ class Game {
     _loose() {
        
         setTimeout(() => {
-            this.gameOver();
+            this.gameOver()
         }, 1000);
         clearInterval(this.intervalId);
     }
 
     _win() {
-        clearInterval(this.intervalId);
         setTimeout(() => {
             this.winGame();
         }, 1000);
+        clearInterval(this.intervalId);
     }
 
     _checkPlayerEnemiesLife() {
