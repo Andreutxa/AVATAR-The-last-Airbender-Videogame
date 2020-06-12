@@ -16,11 +16,14 @@ const F = 70;
 // ------DOM ELEMENTS------ //
 
 const MENU = document.getElementById('menu');
+const LIFE_AND_SCORE = document.getElementById('life-score');
 const WIN_BOX = document.getElementById('win');
 const GAME_OVER = document.getElementById('game-over');
 const SCORE = document.getElementById('score').innerHTML;
 const LIFE_ELEMENT = document.getElementById('avatar-health');
 const START_BTN = document.getElementById('start-btn');
+const RESTART_BTN = document.getElementById('restart-game');
+const PLAY_AGAIN_BTN = document.getElementById('replay-game');
 
 function rand(a, b) {
     return Math.floor(Math.random() * b + a);

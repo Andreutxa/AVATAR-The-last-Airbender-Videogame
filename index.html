@@ -16,7 +16,7 @@
 
     <div id="whole">
 
-        <section id="life-score">
+        <section id="life-score" class="hide">
 
             <div id="avatar">
                 <div id="container-avatar-icon"><img id="avatar-icon" src="./images/avatar-health.png" alt="Avatar icon"></div>
@@ -27,24 +27,23 @@
                 <div><img id="paisho" src="./images/pai-sho.piece.png" alt="Pai sho piece score"></div>
                 <div id="score"><span >0</span></div>
             </div>
-            <button id="start-btn">Play</button>
         </section>
         
         <div id="game-board">
             <canvas id="canvas" width="700" height="520"></canvas>
         </div>
         
-        <!-- <div id="menu">
+        <div id="menu" class="begin-game">
 
             <div>
                 <img id="game-title" src="./images/menu-avatar-title.png" alt="Game title">
                 <p>The last airbender</p>
             </div>
-            <button id="start-btn" class="animate__animated animate__zoomOutUp">Play</button>
+            <button id="start-btn" >Play</button>
 
         </div> 
 
-        <div id="win">
+        <div id="win" class="hide">
 
             <h2>Congratulations <br> Avatar!</h2>
             <div id="score-container">
@@ -55,12 +54,12 @@
 
         </div>
 
-        <div id="game-over">
+        <div id="game-over" class="hide">
 
             <h2>Game Over</h2>
             <button id="restart-game">Try again</button>
 
-        </div> -->
+        </div>
 
     </div>
 

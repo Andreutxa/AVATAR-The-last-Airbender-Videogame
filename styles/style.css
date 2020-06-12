@@ -6,6 +6,10 @@
 
 /* -------SCORE  & LIFE BAR---------- */
 
+.hide {
+    visibility: hidden;
+}
+
 #whole {
     height: 100vh;
     width: 100vw;
@@ -102,6 +106,44 @@ canvas {
     transform: translate(-50%, -50%);
 }
 
+.begin-game {
+    -webkit-animation: puff-out-center 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+	animation: puff-out-center 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+}
+
+@-webkit-keyframes puff-out-center {
+    0% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-filter: blur(0px);
+              filter: blur(0px);
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: scale(2);
+              transform: scale(2);
+      -webkit-filter: blur(4px);
+              filter: blur(4px);
+      opacity: 0;
+    }
+  }
+  @keyframes puff-out-center {
+    0% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-filter: blur(0px);
+              filter: blur(0px);
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: scale(2);
+              transform: scale(2);
+      -webkit-filter: blur(4px);
+              filter: blur(4px);
+      opacity: 0;
+    }
+  }
+
 #game-title {
     width: 40%;
     height: 20%;
@@ -114,7 +156,7 @@ canvas {
     padding-left: 210px;
 }
 
-/* #start-btn {
+#start-btn {
     margin-top: 110px;
     margin-left: 300px;
     padding: 15px;
@@ -126,7 +168,7 @@ canvas {
     position: absolute;
     transition: .6s;
     overflow: hidden;
-} */
+}
 
 #start-btn:focus {
     outline: none;
@@ -176,6 +218,44 @@ canvas {
     opacity: 1;
     transition: .7s;
 }
+
+.btn-moves {
+    -webkit-animation: slide-out-elliptic-top-bck 0.7s ease-in both;
+	animation: slide-out-elliptic-top-bck 0.7s ease-in both;
+}
+
+@-webkit-keyframes slide-out-elliptic-top-bck {
+    0% {
+      -webkit-transform: translateY(0) rotateX(0) scale(1);
+              transform: translateY(0) rotateX(0) scale(1);
+      -webkit-transform-origin: 50% 1400px;
+              transform-origin: 50% 1400px;
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: translateY(-600px) rotateX(-30deg) scale(0);
+              transform: translateY(-600px) rotateX(-30deg) scale(0);
+      -webkit-transform-origin: 50% 100%;
+              transform-origin: 50% 100%;
+      opacity: 1;
+    }
+  }
+  @keyframes slide-out-elliptic-top-bck {
+    0% {
+      -webkit-transform: translateY(0) rotateX(0) scale(1);
+              transform: translateY(0) rotateX(0) scale(1);
+      -webkit-transform-origin: 50% 1400px;
+              transform-origin: 50% 1400px;
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: translateY(-600px) rotateX(-30deg) scale(0);
+              transform: translateY(-600px) rotateX(-30deg) scale(0);
+      -webkit-transform-origin: 50% 100%;
+              transform-origin: 50% 100%;
+      opacity: 1;
+    }
+  }
 
 /* -------WIN GAME--------- */
 

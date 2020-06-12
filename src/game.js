@@ -2,7 +2,7 @@ class Game {
     constructor (ctx) {
         this.ctx = ctx;
         this.intervalId = null;
-        this.player = new Player(ctx, 50, 2);
+        this.player = new Player(ctx, 10, 2);
         this.round = 0;
         this.enemies = [];
         this.tick = 0;
@@ -233,34 +233,26 @@ class Game {
 
     }
     winGame() {
-        this.ctx.drawImage(
-            this.winImg, 
-            0, 
-            0, 
-            this.ctx.canvas.width, 
-            this.ctx.canvas.height
-        );
-        this.ctx.font = '50px Herculanum';
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.textAlign = 'center';
-        this.ctx.fillText('Congratulations, Avatar', this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
+        battleAudio.pause();
+
+        this.winAudio.play();
+        // WIN_BOX.classList.toggle('hide');
+        PLAY_AGAIN_BTN.addEventListener('click', () => {
+            window.location.reload();
+            });
+        
     }
     
     gameOver() {
         battleAudio.pause();
-        this.gameOverAudio.play();
-        
-        this.ctx.drawImage(
-            this.gameOverImg, 
-            0, 
-            0, 
-            this.ctx.canvas.width, 
-            this.ctx.canvas.height
-        );
-        this.ctx.font = '50px Herculanum';
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.textAlign = 'right';
-        this.ctx.fillText('Game Over', this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
+
+        const gameOverAppears = setTimeout(() =>{
+            this.gameOverAudio.play();
+            GAME_OVER.classList.toggle('hide');
+            RESTART_BTN.addEventListener('click', () => {
+                window.location.reload();
+                });
+          }, 300);
     }
     
     _loose() {
