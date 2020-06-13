@@ -5,8 +5,8 @@ class Airbending {
         this.x =x;
         this.y = y;
 
-        this.width = 70;
-        this.height = 40;
+        this.width = 60;
+        this.height = 60;
 
         this.v = 3;
         this.dx = dx * this.v;
@@ -14,7 +14,7 @@ class Airbending {
         this.angle = angle;
 
         this.img = new Image();
-        this.img.src = './images/Aang-attacks/airbending-attack.png';
+        this.img.src = './images/Aang-attacks/airbending-attack1.png';
         this.img.frames = 2;
         this.img.frameIndex = 0;
     }
@@ -24,17 +24,13 @@ class Airbending {
 
         this.ctx.drawImage(
             this.img,
-            this.img.frameIndex * this.img.width / this.img.frames,
-            0,
-            this.img.width / this.img.frames,
-            this.img.height,
             this.x,
             this.y,
             this.width,
             this.height
           );
 
-        this.animate(this.img);
+        // this.animate(this.img);
 
         this.ctx.translate(this.x, this.y);
         this.ctx.rotate(this.angle);

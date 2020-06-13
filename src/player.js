@@ -72,8 +72,10 @@ class Player {
     }
 
     hittedUpdate() {
+        LIFE_ELEMENT.value = this.health;
         setTimeout(() => {
             this.hitted = false;
+
         }, 2000);
     }
     
@@ -255,7 +257,7 @@ class Player {
         });
 
         document.addEventListener('keydown', key => {
-            var state = key.type === 'keydown' ? true : false;
+            let state = key.type === 'keydown' ? true : false;
               if (key.keyCode === UP || key.keyCode === W) {
                   this.actions.up = true
                   this.vy = -4;
@@ -298,17 +300,20 @@ class Player {
         this.x += this.vx;
         this.y += this.vy;
 
-        this.currPositX = this.x;
-        this.currPositY = this.y;
+        if (this.x <= 0) {
+            this.x = 0;
+        } else if (this.x >= 660) {
+            this.x = 660;
+        }
 
-    }
+        const topLimit = this.ctx.canvas.height * 0.25;
 
-    recieveDamage(damage) {
-        this.health -= damage;
+        if (this.y <= topLimit) {
+            this.y = topLimit;
+        } else if (this.y >= 470) {
+            this.y = 470;
+        }
 
-        // if (this.health <= 0) {
-        //     game over
-        // }
     }
 
 }

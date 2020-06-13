@@ -2,7 +2,7 @@ class Game {
     constructor (ctx) {
         this.ctx = ctx;
         this.intervalId = null;
-        this.player = new Player(ctx, 50, 2);
+        this.player = new Player(ctx, 100, 2);
         this.background = new Background(ctx);
         this.round = 0;
         this.enemies = [];
@@ -19,20 +19,32 @@ class Game {
         this.winImg.src = './images/winImg.png';
         this.winAudio = document.getElementById('win-sound');
 
+        // this.battleAudio = document.getElementById('battle-sound');
         this.gameOverImg = new Image();
         this.gameOverImg.src = './images/gameOverImg.png';
         this.gameOverAudio = document.getElementById('game-over-sound');
     }
 
+    getMousePos(evt) {
+        var rect = this.ctx.canvas.getBoundingClientRect();
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top,
+        };
+      }
+
     setListeners() {
-        console.log(LIFE_ELEMENT.value)
         document.addEventListener('mousemove', (evt) => {
-            this.mouseX = evt.clientX - 25;
-            this.mouseY = evt.clientY - 25;
+            var mousePos = this.getMousePos(evt);
+            this.mouseX = mousePos.x - 45;
+            this.mouseY = mousePos.y - 45;
         });
     }
 
     start() {
+
+        // this.battleAudio.play();
+
         this.intervalId = setInterval(() => {
             this._clear();
             this._draw();
@@ -62,25 +74,24 @@ class Game {
                 enemy.attack();
             }    
         });
-
-        this.points.forEach(point => {
-            point.draw();
-        });
         
     }
 
     _checkRound() {
         if (this.enemies.length === 0 && this.round === 0) {
             this._addEnemies(0, 15);
+            this._addPowerfulEnemies(0, 2);
             this.round = 1;
         } else if (this.enemies.length === 0 && this.round === 1) {
             this._addEnemies(1, 7);
+            this._addPowerfulEnemies(1, 5);
             this.round = 2;
         } else if (this.enemies.length === 0 && this.round === 2) {
-            this._addEnemies(2, 3);
+            this._addEnemies(2, 2);
+            this._addPowerfulEnemies(2, 3);
             this.round = 3;
         } else if (this.enemies.length === 0 && this.round === 3) {
-            this._addEnemies(3, 1);
+            this._addPowerfulEnemies(3, 1);
             this.round = 4;
         } else if (this.enemies.length === 0 && this.round === 4) {
             this._win();
@@ -111,6 +122,33 @@ class Game {
             break;
         }
     }
+
+    _addPowerfulEnemies(roundNum, enemyNum) {
+        switch(roundNum) {
+            case 0:
+                while(this.enemies.length < enemyNum + 15) {
+                    this.enemies.push(new FireSoldier(ctx, 7, 20));
+                }
+            break;
+            case 1:
+                while(this.enemies.length < enemyNum + 7) {
+                    this.enemies.push(new FireSoldier(ctx, 15, 30));
+                }
+            break;
+            case 2:
+                while(this.enemies.length < enemyNum + 2) {
+                    this.enemies.push(new FireSoldier(ctx, 25, 40));
+                }
+            break;
+            case 3:
+                while(this.enemies.length < enemyNum) {
+                    this.enemies.push(new Azula(ctx, 50, 70));
+                }
+            break;
+        }
+    }
+
+    
     
     _move() {
         this.player.move();
@@ -143,6 +181,7 @@ class Game {
                     if (enemy.health <= 0) {
                         let index = this.enemies.indexOf(enemy);
                         this.enemies.splice(index, 1);
+                        SCORE.innerHTML = this.score;
                         this.score += enemy.strength;
                     }
                     console.log(enemy.health);
@@ -163,6 +202,7 @@ class Game {
                     if (enemy.health <= 0) {
                         let index = this.enemies.indexOf(enemy);
                         this.enemies.splice(index, 1);
+                        SCORE.innerHTML = this.score;
                         this.score += enemy.strength;
                     }
                     console.log(enemy.health);
@@ -183,6 +223,7 @@ class Game {
                     if (enemy.health <= 0) {
                         let index = this.enemies.indexOf(enemy);
                         this.enemies.splice(index, 1);
+                        SCORE.innerHTML = this.score;
                         this.score += enemy.strength;
                     }
                     console.log(enemy.health);
@@ -203,6 +244,7 @@ class Game {
                     if (enemy.health <= 0) {
                         let index = this.enemies.indexOf(enemy);
                         this.enemies.splice(index, 1);
+                        SCORE.innerHTML = this.score;
                         this.score += enemy.strength;
                     }
                     console.log(enemy.health);
@@ -212,14 +254,68 @@ class Game {
         });
 
 
-        if (collision && !this.player.hitted || bendingCollision && !this.player.hitted) {
+        if (collision && !this.player.hitted || bendingCollision && !this.player.hitted && this.round === 0) {
+
             this.player.hitted = true;
-            this.player.health--;
+            if (this.player.health > 0) {
+                this.player.health -= 1;
+            }
+            SCORE.innerHTML = this.score;
+            if(this.score >= 0) {
+                this.score -= 3;
+                if(this.score < 0){
+                    this.score = 0;
+                }
+            }
             this.player.hittedUpdate();
            
-            console.log(this.player.health);
-        }
+        } else if (collision && !this.player.hitted || bendingCollision && !this.player.hitted && this.round === 1) {
 
+            this.player.hitted = true;
+            if (this.player.health > 0) {
+                this.player.health -= 5;
+            }
+            SCORE.innerHTML = this.score;
+            if(this.score >= 0) {
+                this.score -= 3;
+                if(this.score < 0){
+                    this.score = 0;
+                }
+            }
+            this.player.hittedUpdate();
+
+        } else if (collision && !this.player.hitted || bendingCollision && !this.player.hitted && this.round === 2) {
+            
+            this.player.hitted = true;
+            if (this.player.health > 0) {
+                this.player.health -= 5;
+            }
+            SCORE.innerHTML = this.score;
+            if(this.score >= 0) {
+                this.score -= 3;
+                if(this.score < 0){
+                    this.score = 0;
+                }
+            }
+            this.player.hittedUpdate();
+
+        } else if (collision && !this.player.hitted || bendingCollision && !this.player.hitted && this.round === 3) {
+            
+            this.player.hitted = true;
+            if (this.player.health > 0) {
+                this.player.health -= 10;
+            }
+            SCORE.innerHTML = this.score;
+            if(this.score >= 0) {
+                this.score -= 3;
+                if(this.score < 0){
+                    this.score = 0;
+                }
+            }
+            this.player.hittedUpdate();
+
+        }
+        console.log(this.player.health);
         const pointsCollision = this.enemies.some(enemy => {
             if (enemy.health === 0) { 
                 this.points.push(new Paisho(ctx, enemy.x, enemy.y));
@@ -236,21 +332,36 @@ class Game {
     }
     winGame() {
         battleAudio.pause();
+        this.player.fireAudio.pause();
+        this.player.waterAudio.pause();
+        this.player.windAudio.pause();
+        this.player.earthAudio.pause();
 
         this.winAudio.play();
-        WIN_BOX.classList.toggle('hide');
-        PLAY_AGAIN_BTN.addEventListener('click', () => {
+        const winGameAppears = setTimeout(() => {
+            WIN_BOX.classList.remove('hide');
+            WIN_BOX.classList.add('fade-in');
+            FINAL_SCORE.innerHTML = SCORE.innerHTML;
+            PLAY_AGAIN_BTN.addEventListener('click', () => {
             window.location.reload();
-            });
+        });
+        }, 300);
+            
         
     }
     
     gameOver() {
         battleAudio.pause();
+        this.player.fireAudio.pause();
+        this.player.waterAudio.pause();
+        this.player.windAudio.pause();
+        this.player.earthAudio.pause();
 
+        this.gameOverAudio.play();
         const gameOverAppears = setTimeout(() =>{
-            this.gameOverAudio.play();
             GAME_OVER.classList.toggle('hide');
+            GAME_OVER.classList.toggle('fade-in');
+            FINAL_SCORE.innerHTML = SCORE.innerHTML;
             RESTART_BTN.addEventListener('click', () => {
                 window.location.reload();
                 });
@@ -260,7 +371,7 @@ class Game {
     _loose() {
        
         setTimeout(() => {
-            this.gameOver()
+            this.gameOver();
         }, 1000);
         clearInterval(this.intervalId);
     }
@@ -273,7 +384,7 @@ class Game {
     }
 
     _checkPlayerEnemiesLife() {
-        if (this.player.health === 0) {
+        if (this.player.health <= 0) {
             this._loose();
         } else if (this.enemies.length === 0  && this.round === 4) {
             this._win();
@@ -282,6 +393,7 @@ class Game {
 
     updateScore() {
         SCORE.innerText = this.score;
+        FINAL_SCORE.innerText = this.score;
     }
     
 }

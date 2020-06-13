@@ -9,19 +9,32 @@ START_BTN.addEventListener('click', () => {
 
     const startLeaves = setTimeout(() =>{
         START_BTN.classList.add('btn-moves');
-        MENU.classList.add('begin-game'); // Por qué no hace efecto esta clase?
-      }, 300);
+        
+      }, 500);
 
     const menuLeaves = setTimeout(() =>{
-        MENU.classList.toggle('hide'); //Cómo añadir efecto "fadeIn"?
-      }, 1400);
+        MENU.classList.toggle('fade-out'); 
+      }, 1000);
+
+    const countDownDiv = setTimeout(() => {
+        COUNT_DOWN_DIV.classList.toggle('hide');
+        COUNT_DOWN_DIV.classList.toggle('fade-in');
+    }, 1100);
+    
+    const countDownDivLeaves = setTimeout(() => {
+        COUNT_DOWN_DIV.classList.toggle('fade-out');
+    }, 7000);
+ 
 
     const lifeScoreAppears = setTimeout(() =>{
         LIFE_AND_SCORE.classList.toggle('hide');
-      }, 1420);
+        LIFE_AND_SCORE.classList.toggle('fade-in');
+      }, 7400);
 
-        game.start();
         battleAudio.play();
+        setTimeout(() => {
+            game.start();
+        }, 7400);
         battleAudio.volume = 0.1;
     }
 );

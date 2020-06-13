@@ -25,8 +25,9 @@
 
             <div id="score-counting">
                 <div><img id="paisho" src="./images/pai-sho.piece.png" alt="Pai sho piece score"></div>
-                <div id="score"><span >0</span></div>
+                <div class="score-div"><span id="score">0</span></div>
             </div>
+
         </section>
         
         <div id="game-board">
@@ -43,12 +44,36 @@
 
         </div> 
 
+        <div id="count-down-game" class="hide">
+
+            <div id="loading">
+                <p>Loading...</p>
+            </div>
+
+            <div class="icons-container">
+                <img src="./images/water-icon.jpg" alt="Water icon">
+            </div>
+
+            <div class="icons-container">
+                <img src="./images/earth-icon.jpg" alt="Earth-icon">
+            </div>
+
+            <div class="icons-container">
+                <img src="./images/fire-icon.jpg" alt="Fire-icon">
+            </div>
+
+            <div class="icons-container">
+                <img src="./images/air-icon.jpg" alt="air-icon">
+            </div>
+
+        </div>
+
         <div id="win" class="hide">
 
             <h2>Congratulations <br> Avatar!</h2>
-            <div id="score-container">
+            <div>
                 <img id="paisho-win" src="./images/pai-sho.piece.png" alt="Pai sho piece">
-                <p>Score :<span id="final-score"></span></p>
+                <p>Score :<span class="final-score"></span></p>
             </div>
             <button id="replay-game">Play again</button>
 
@@ -57,6 +82,10 @@
         <div id="game-over" class="hide">
 
             <h2>Game Over</h2>
+            <div>
+                <img id="paisho-game-over" src="./images/pai-sho.piece.png" alt="Pai sho piece">
+                <p>Score :<span class="final-score"></span></p>
+            </div>
             <button id="restart-game">Try again</button>
 
         </div>
@@ -79,6 +108,8 @@
     <script src="./src/firebending.js"></script>
     <script src="./src/player.js"></script>
     <script src="./src/enemy.js"></script>
+    <script src="./src/azula.js"></script>
+    <script src="./src/fire-soldier.js"></script>
     <script src="./src/background.js"></script>
     <script src="./src/game.js"></script>
     <script src="./src/constants.js"></script>

@@ -38,6 +38,50 @@ canvas {
     width: 100%;
 }
 
+.fade-in {
+    -webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@-webkit-keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .fade-out {
+    -webkit-animation: fade-out 1s ease-out both;
+    animation: fade-out 1s ease-out both;
+  }
+
+  @-webkit-keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
 #score-counting {
     font-family: 'Herculanum';
     font-size: 50px;
@@ -45,22 +89,22 @@ canvas {
     border-radius: 20px;
     box-sizing: border-box;
     box-shadow: 2px 2px 10px 0 #eee;
-    width: 6%;
-    height: 5%;
+    width: 200px;
+    height: 65px;
     margin-top: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #eee;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 #paisho {
     padding-top: 10px;
     padding-left: 10px;
     padding-bottom: -20px;
-    width: 70%;
-    height: 70%;
+    width: 30%;
+    height: 30%;
 }
 
 #avatar {
@@ -106,42 +150,9 @@ canvas {
 }
 
 .begin-game {
-    -webkit-animation: puff-out-center 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
-	animation: puff-out-center 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) both;
+    
 }
 
-@-webkit-keyframes puff-out-center {
-    0% {
-      -webkit-transform: scale(1);
-              transform: scale(1);
-      -webkit-filter: blur(0px);
-              filter: blur(0px);
-      opacity: 1;
-    }
-    100% {
-      -webkit-transform: scale(2);
-              transform: scale(2);
-      -webkit-filter: blur(4px);
-              filter: blur(4px);
-      opacity: 0;
-    }
-  }
-  @keyframes puff-out-center {
-    0% {
-      -webkit-transform: scale(1);
-              transform: scale(1);
-      -webkit-filter: blur(0px);
-              filter: blur(0px);
-      opacity: 1;
-    }
-    100% {
-      -webkit-transform: scale(2);
-              transform: scale(2);
-      -webkit-filter: blur(4px);
-              filter: blur(4px);
-      opacity: 0;
-    }
-  }
 
 #game-title {
     width: 40%;
@@ -364,13 +375,58 @@ canvas {
     text-shadow: #eee;
 }
 
+#paisho-game-over {
+    display: block;
+    width: 12%;
+    height: 12%;
+    padding-left: 510px;
+    padding-top: 20px;
+}
+
+.game-over-h2 {
+    -webkit-animation: tracking-in-expand 2.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	animation: tracking-in-expand 2.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+@-webkit-keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+#game-over p {
+    font-size: 30px;
+    color: #CED7FF;
+    padding-top: 50px;
+    padding-left: 350px;
+}
+
 #restart-game {
-    margin-top: 100px;
-    margin-left: 430px;
+    margin-top: 30px;
+    margin-left: 470px;
     padding: 15px;
     border: 1px solid #9CA8DA;
     border-radius: 10px;
-    box-shadow: 2px 2px 10px 0 #0F0F0E;
+    box-shadow: 2px 2px 10px 0 #CED7FF;
     font-size: 25px;
     background-color: #CED7FF;
     -webkit-animation: vibrate-1 0.3s linear infinite both;
@@ -427,5 +483,83 @@ canvas {
     100% {
       -webkit-transform: translate(0);
               transform: translate(0);
+    }
+  }
+
+
+  /* -------TRANSITIONS--------- */
+
+  #count-down-game {
+    width: 700px;
+    height: 520px;
+    background-color: #0F0F0E;
+    position: absolute;
+    border: 2px solid #6A611F;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 0 #0F0F0E;
+    top: 49%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
+    
+  }
+
+  #loading {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 49%;
+    left: 37%;
+    transform: translate(-50%, -50%);
+  }
+
+  #loading p {
+      font-size: 60px;
+      color: #CED7FF;
+      text-align: center;
+      padding-top: 15px;
+}
+
+
+  .icons-container {
+    border: 2px solid rgba(206, 215, 255, 0);
+    border-radius: 20px;
+    box-sizing: border-box;
+    margin: 0 5% 0 5%;
+    padding-left: 40px;
+    padding-top: 20px;
+    width: 40%;
+  }
+
+  .icons-container img {
+    border-radius: 20px;
+    box-shadow: 2px 2px 10px 0 #eee;
+    opacity: 0.7;
+    -webkit-animation: blink-1 4s 2 both;
+	animation: blink-1 4s 2 both;
+  }
+
+  @-webkit-keyframes blink-1 {
+    0%,
+    50%,
+    100% {
+      opacity: 1;
+    }
+    25%,
+    75% {
+      opacity: 0;
+    }
+  }
+  @keyframes blink-1 {
+    0%,
+    50%,
+    100% {
+      opacity: 1;
+    }
+    25%,
+    75% {
+      opacity: 0;
     }
   }
