@@ -38,50 +38,6 @@ canvas {
     width: 100%;
 }
 
-.fade-in {
-    -webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-}
-
-@-webkit-keyframes fade-in {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-  @keyframes fade-in {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  .fade-out {
-    -webkit-animation: fade-out 1s ease-out both;
-    animation: fade-out 1s ease-out both;
-  }
-
-  @-webkit-keyframes fade-out {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-  @keyframes fade-out {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-
 #score-counting {
     font-family: 'Herculanum';
     font-size: 50px;
@@ -89,15 +45,17 @@ canvas {
     border-radius: 20px;
     box-sizing: border-box;
     box-shadow: 2px 2px 10px 0 #eee;
-    width: 200px;
-    height: 65px;
+    width: 170px;
+    height: 58px;
     margin-top: 5px;
+    margin-left: -70px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #eee;
     margin-bottom: 20px;
 }
+
 
 #paisho {
     padding-top: 10px;
@@ -133,6 +91,7 @@ canvas {
     /* padding-left: 60px; */
 }
 
+
 /* --------MENU---------- */
 
 #menu {
@@ -147,10 +106,6 @@ canvas {
     top: 49%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-.begin-game {
-    
 }
 
 
@@ -267,6 +222,103 @@ canvas {
     }
   }
 
+/* -------ROUNDS--------- */
+
+#rounds-container {
+    /* border: 2px solid rgba(206, 215, 255, 1);
+    border-radius: 20px;
+    box-sizing: border-box;
+    width: 500px;
+    padding-left: 40px;
+    margin-left: 100px; */
+    width: 700px;
+    height: 520px;
+    position: absolute;
+    border: 2px solid #6A611F;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 0 #0F0F0E;
+    top: 49%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#round-1 {
+    width: 700px;
+    height: 520px;
+    position: absolute;
+    border: 2px solid #6A611F;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 0 #0F0F0E;
+    top: 49%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#round-1 img {
+    width: 90%;
+    height: 90%;
+    padding-left: 30px;
+    margin-top: -80px;
+}
+
+#round-2 {
+    width: 700px;
+    height: 520px;
+    position: absolute;
+    border: 2px solid #6A621F;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 0 #0F0F0E;
+    top: 49%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#round-2 img {
+    width: 90%;
+    height: 90%;
+    padding-left: 30px;
+    margin-top: -80px;
+}
+
+#round-3 {
+    width: 700px;
+    height: 520px;
+    position: absolute;
+    border: 2px solid #6A621F;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 0 #0F0F0E;
+    top: 49%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#round-3 img {
+    width: 90%;
+    height: 90%;
+    padding-left: 30px;
+    margin-top: -80px;
+}
+
+#round-4 {
+    width: 700px;
+    height: 520px;
+    position: absolute;
+    border: 2px solid #6A621F;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 0 #0F0F0E;
+    top: 49%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#round-4 img {
+    width: 90%;
+    height: 90%;
+    padding-left: 30px;
+    margin-top: -80px;
+}
+
+
 /* -------WIN GAME--------- */
 
 #win {
@@ -296,15 +348,19 @@ canvas {
     display: block;
     width: 12%;
     height: 12%;
-    padding-left: 300px;
-    padding-top: 20px;
+    margin-left: 300px;
+    margin-top: 20px;
 }
 
 #win p {
     font-size: 30px;
-    color: #0F0F0E;
+    color: #CED7FF;
     padding-top: 50px;
     padding-left: 150px;
+}
+
+#win-total-final-score {
+    margin-left: 85px;
 }
 
 #replay-game {
@@ -366,24 +422,29 @@ canvas {
     transform: translate(-50%, -50%);
     color: #eee;
 }
+#game-over-container {
+    /* width: 40%; */
+    margin-left: 300px;
+    padding-top: 100px;
+}
+
+#game-over-flex {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
 
 #game-over h2 {
-    margin-top: 50px;
-    margin-left: 300px;
+    /* margin-top: 50px;
+    margin-left: 300px; */
     font-size: 70px;
     text-align: center;
     text-shadow: #eee;
 }
 
-#paisho-game-over {
-    display: block;
-    width: 12%;
-    height: 12%;
-    padding-left: 510px;
-    padding-top: 20px;
-}
 
-.game-over-h2 {
+
+.win-loose-h2 {
     -webkit-animation: tracking-in-expand 2.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 	animation: tracking-in-expand 2.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
@@ -413,17 +474,58 @@ canvas {
     }
   }
 
+#paisho-game-over {
+    display: block;
+    width: 20%;
+    height: 20%;
+    align-self: center;
+    margin-top: 30px;
+}
+
+.paisho-flip {
+    -webkit-animation: flip-vertical-right 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+	animation: flip-vertical-right 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+}
+
+@-webkit-keyframes flip-vertical-right {
+    0% {
+      -webkit-transform: rotateY(0);
+              transform: rotateY(0);
+    }
+    100% {
+      -webkit-transform: rotateY(180deg);
+              transform: rotateY(180deg);
+    }
+  }
+  @keyframes flip-vertical-right {
+    0% {
+      -webkit-transform: rotateY(0);
+              transform: rotateY(0);
+    }
+    100% {
+      -webkit-transform: rotateY(180deg);
+              transform: rotateY(180deg);
+    }
+  }
+
 #game-over p {
     font-size: 30px;
     color: #CED7FF;
-    padding-top: 50px;
-    padding-left: 350px;
+    margin-top: 30px;
+}
+
+#game-over-total-final-score {
+    padding-left: 90px;
 }
 
 #restart-game {
-    margin-top: 30px;
-    margin-left: 470px;
-    padding: 15px;
+    /* margin-top: 30px;
+    margin-left: 470px; */
+    align-self: center;
+    width: 170px;
+    height: 50px;
+    margin-top: 50px;
+    margin-left: 70px;
     border: 1px solid #9CA8DA;
     border-radius: 10px;
     box-shadow: 2px 2px 10px 0 #CED7FF;
@@ -486,8 +588,50 @@ canvas {
     }
   }
 
-
   /* -------TRANSITIONS--------- */
+  .fade-in {
+    -webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@-webkit-keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .fade-out {
+    -webkit-animation: fade-out 1s ease-out both;
+    animation: fade-out 1s ease-out both;
+  }
+
+  @-webkit-keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 
   #count-down-game {
     width: 700px;

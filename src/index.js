@@ -29,6 +29,9 @@ START_BTN.addEventListener('click', () => {
     const lifeScoreAppears = setTimeout(() =>{
         LIFE_AND_SCORE.classList.toggle('hide');
         LIFE_AND_SCORE.classList.toggle('fade-in');
+        ROUNDS.classList.toggle('hide');
+        ROUND_1.classList.remove('hide');
+        ROUND_1.classList.add('fade-in');
       }, 7400);
 
         battleAudio.play();

@@ -1,5 +1,5 @@
 class Paisho {
-    constructor(ctx, x, y) {
+    constructor(ctx, value) {
         this.ctx = ctx;
 
         this.img = new Image();
@@ -7,10 +7,10 @@ class Paisho {
 
         this.width = 30;
         this.height = 30;
-        this.x = x;
-        this.y = y;
+        this.x = Math.random() * (this.ctx.canvas.width - this.width);
+        this.y = between(this.ctx.canvas.height, (this.ctx.canvas.height * 0.25 - this.height));
 
-        this.value = 100;
+        this.value = value;
     }
 
     draw() {

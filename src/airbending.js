@@ -5,8 +5,8 @@ class Airbending {
         this.x =x;
         this.y = y;
 
-        this.width = 60;
-        this.height = 60;
+        this.width = 50;
+        this.height = 50;
 
         this.v = 3;
         this.dx = dx * this.v;

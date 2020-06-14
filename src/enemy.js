@@ -111,6 +111,7 @@ class Enemy extends Player {
         this.dx = avatarX - this.x; 
         this.dy = avatarY - this.y;
         this.angle = Math.atan2(this.dy, this.dx);
+
     }
 
     move() {

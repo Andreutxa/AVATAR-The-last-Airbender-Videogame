@@ -2,8 +2,8 @@ class Firebending extends Airbending {
     constructor(ctx, angle, x, y, dx, dy) {
         super(ctx, angle, x, y, dx, dy);
 
-        this.width = 50;
-        this.height = 50;
+        this.width = 40;
+        this.height = 40;
 
         this.img = new Image();
         this.img.src = './images/Aang-attacks/firebending-attack1.png';
