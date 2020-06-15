@@ -1,6 +1,6 @@
 # AVATAR-The-last-Airbender-Videogame
 
-_Proyecto final del módulo 1 en el curso intensivo Web Development de Iron Hack. Un videojuego estilo RPG basado en la serie de **Avatar: The last Airbender.**_
+_Proyecto final del módulo 1 en el curso intensivo Web Development de Iron Hack. Un videojuego hecho en 2 semanas estilo RPG basado en la serie **Avatar: The last Airbender.**_
 
 ## Instrucciones 🚀
 
