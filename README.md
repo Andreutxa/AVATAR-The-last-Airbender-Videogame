@@ -8,6 +8,8 @@ _Tu misión consiste en derrotar a los soldados de la nación del Fuego dominand
 _Intenta recoger todas las piezas de Pai Sho que puedas para obtener una puntuación más alta y cúrate bebiendo un delicioso té de del tío Iroh!_ 
 _La "final boss" será Azula... mucha suerte, Avatar._
 
+* Empieza a jugar aquí! -> [AVATAR: The last Airbender](https://andreutxa.github.io/AVATAR-The-last-Airbender-Videogame/)
+
 ## Creado con 🛠️
 
 _Las herramientas usadas para realizar este proyecto son:_
