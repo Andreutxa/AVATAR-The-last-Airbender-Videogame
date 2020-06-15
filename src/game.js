@@ -21,6 +21,7 @@ class Game {
         this.winAudio = document.getElementById('win-sound');
         this.gameOverAudio = document.getElementById('game-over-sound');
         this.pickupPaishoAudio = document.getElementById('pickup-paisho');
+        this.grabTeaAudio = document.getElementById('grabbing-tea');
     }
 
     getMousePos(evt) {
@@ -455,16 +456,16 @@ class Game {
                 });
         const teaCollision = this.tea.some(tea => {
                     const timeOutTea = setTimeout(() => {
-                        let indexCoins = this.tea.indexOf(tea);
-                        this.tea.splice(indexCoins, 1);
+                        let indexTea = this.tea.indexOf(tea);
+                        this.tea.splice(indexTea, 1);
                     }, 2000);
 
                     if(tea.collide(this.player)) {
-                        this.pickupPaishoAudio.play();
+                        this.grabTeaAudio.play();
                         this.pickupPaishoAudio.volume = 0.2;
                         this.player.health += tea.value;
-                        let indexCoins = this.tea.indexOf(tea);
-                        this.tea.splice(indexCoins, 1);
+                        let indexTea = this.tea.indexOf(tea);
+                        this.tea.splice(indexTea, 1);
                     }
                 });
             
