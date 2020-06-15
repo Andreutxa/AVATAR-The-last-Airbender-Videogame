@@ -5,6 +5,24 @@ const game = new Game(ctx);
 
 const battleAudio = document.getElementById('battle-sound');
 
+INSTRUCTIONS_BTN.addEventListener('click', () => {
+    const instructionsAppear = setTimeout(() => {
+        INSTRUCTIONS_DIV.classList.toggle('hide');
+        INSTRUCTIONS_DIV.classList.toggle('fade-in');
+    }, 100);
+});
+
+BACK_TO_MENU_BTN.addEventListener('click', () => {
+    INSTRUCTIONS_DIV.classList.toggle('fade-out');
+    setTimeout(() => {
+        INSTRUCTIONS_DIV.classList.toggle('hide');
+    }, 1000);
+    setTimeout(() => {
+        
+        window.location.reload();
+    }, 1050);
+});
+
 START_BTN.addEventListener('click', () => {
 
     const startLeaves = setTimeout(() =>{
@@ -40,4 +58,5 @@ START_BTN.addEventListener('click', () => {
         }, 7400);
         battleAudio.volume = 0.1;
     }
+
 );

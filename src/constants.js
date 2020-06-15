@@ -16,7 +16,9 @@ const F = 70;
 // ------DOM ELEMENTS------ //
 
 const MENU = document.getElementById('menu');
+const INSTRUCTIONS_DIV = document.getElementById('instructions');
 const LIFE_AND_SCORE = document.getElementById('life-score');
+const LIFE_ELEMENT = document.getElementById('avatar-health');
 
 const COUNT_DOWN_DIV = document.getElementById('count-down-game');
 const COUNT_DOWN = document.getElementById('count-down-numbers');
@@ -45,7 +47,8 @@ const SCORE = document.getElementById('score');
 const WINNING_FINAL_SCORE = document.getElementById('win-total-final-score');
 const LOOSE_FINAL_SCORE = document.getElementById('game-over-total-final-score');
 // const FINAL_SCORE = document.getElementsByClassName('final-score');
-const LIFE_ELEMENT = document.getElementById('avatar-health');
+const INSTRUCTIONS_BTN = document.getElementById('instructions-btn');
+const BACK_TO_MENU_BTN = document.getElementById('back-to-menu-btn');
 const START_BTN = document.getElementById('start-btn');
 const RESTART_BTN = document.getElementById('restart-game');
 const PLAY_AGAIN_BTN = document.getElementById('replay-game');

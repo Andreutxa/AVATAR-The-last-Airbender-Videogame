@@ -122,7 +122,7 @@ canvas {
 }
 
 #start-btn {
-    margin-top: 110px;
+    margin-top: 70px;
     margin-left: 300px;
     padding: 15px;
     border: 1px solid rgb(164, 129, 245);
@@ -222,6 +222,147 @@ canvas {
     }
   }
 
+
+  #instructions {
+    width: 600px;
+    height: 400px;
+    background-image: url('../images/instructions.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    border: 2px solid #CED7FF;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 0 #0F0F0E;
+    top: 49%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #instructions-btn {
+    margin-top: 160px;
+    margin-left: 250px;
+    padding: 15px;
+    border: 1px solid rgb(164, 129, 245);
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 0 #0F0F0E;
+    font-size: 25px;
+    background-color: rgb(167, 155, 228);
+    position: absolute;
+    transition: .6s;
+    overflow: hidden;
+  }
+
+#instructions-btn:focus {
+    outline: none;
+}
+
+#instructions-btn:before {
+    content: '';
+    display: block;
+    position: absolute;
+    background: rgba(206, 215, 255, .5);
+    width: 60px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: .5s;
+    filter: blur(30px);
+    transform: translateX(-130px) skewX(-15deg);
+}
+
+#instructions-btn:after {
+    content: '';
+    display: block;
+    position: absolute;
+    background: rgba(206, 215, 255, .2);
+    width: 30px;
+    height: 100%;
+    left: 30px;
+    top: 0;
+    opacity: 0;
+    filter: blur(30px);
+    transform: translate(-100px) scaleX(-15deg);
+}
+
+#instructions-btn:hover {
+    background: rgb(194, 205, 250);
+    cursor: pointer;
+}
+
+#instructions-btn:hover:before {
+    transform: translateX(300px) skewX(-15deg);
+    opacity: .6;
+    transition: .4s;
+}
+
+#instructions-btn:hover:after {
+    transform: translateX(300px) skewX(-15deg);
+    opacity: 1;
+    transition: .7s;
+}
+
+#back-to-menu-btn {
+    margin-top: 5px;
+    margin-left: 560px;
+    border: 1px solid rgb(164, 129, 245);
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 0 #0F0F0E;
+    font-size: 25px;
+    background-color: rgb(167, 155, 228);
+    position: absolute;
+    transition: .6s;
+    overflow: hidden;
+    color: white;
+}
+
+#back-to-menu-btn:focus {
+    outline: none;
+}
+
+#back-to-menu-btn:before {
+    content: '';
+    display: block;
+    position: absolute;
+    background: rgba(206, 215, 255, .5);
+    width: 60px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: .5s;
+    filter: blur(30px);
+    transform: translateX(-130px) skewX(-15deg);
+}
+
+#back-to-menu-btn:after {
+    content: '';
+    display: block;
+    position: absolute;
+    background: rgba(206, 215, 255, .2);
+    width: 30px;
+    height: 100%;
+    left: 30px;
+    top: 0;
+    opacity: 0;
+    filter: blur(30px);
+    transform: translate(-100px) scaleX(-15deg);
+}
+
+#back-to-menu-btn:hover {
+    background: rgb(194, 205, 250);
+    cursor: pointer;
+}
+
+#back-to-menu-btn:hover:before {
+    transform: translateX(300px) skewX(-15deg);
+    opacity: .6;
+    transition: .4s;
+}
+
+#back-to-menu-btn:hover:after {
+    transform: translateX(300px) skewX(-15deg);
+    opacity: 1;
+    transition: .7s;
+}
 /* -------ROUNDS--------- */
 
 #rounds-container {
@@ -255,9 +396,9 @@ canvas {
 }
 
 #round-1 img {
-    width: 90%;
-    height: 90%;
-    padding-left: 30px;
+    width: 80%;
+    height: 80%;
+    padding-left: 70px;
     margin-top: -80px;
 }
 
@@ -274,9 +415,9 @@ canvas {
 }
 
 #round-2 img {
-    width: 90%;
-    height: 90%;
-    padding-left: 30px;
+    width: 80%;
+    height: 80%;
+    padding-left: 70px;
     margin-top: -80px;
 }
 
@@ -293,9 +434,9 @@ canvas {
 }
 
 #round-3 img {
-    width: 90%;
-    height: 90%;
-    padding-left: 30px;
+    width: 80%;
+    height: 80%;
+    padding-left: 70px;
     margin-top: -80px;
 }
 
@@ -312,9 +453,9 @@ canvas {
 }
 
 #round-4 img {
-    width: 90%;
-    height: 90%;
-    padding-left: 30px;
+    width: 80%;
+    height: 80%;
+    padding-left: 70px;
     margin-top: -80px;
 }
 
