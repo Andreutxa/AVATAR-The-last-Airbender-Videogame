@@ -4,6 +4,7 @@ let ctx = canvas.getContext('2d')
 const game = new Game(ctx);
 
 const battleAudio = document.getElementById('battle-sound');
+battleAudio.loop = true;
 
 INSTRUCTIONS_BTN.addEventListener('click', () => {
     const instructionsAppear = setTimeout(() => {
